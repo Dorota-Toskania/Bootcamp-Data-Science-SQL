@@ -1,0 +1,224 @@
+Projekt SQL Dorota
+Pkt 2
+
+CREATE TABLE Dostawca (
+	Id_dost INTEGER NOT NULL PRIMARY KEY,
+	Nazwa_producenta VARCHAR(50),
+	Adres_producenta TEXT,
+    NIP_producenta VARCHAR (20) UNIQUE,
+	Data_umowy DATE
+);
+
+Pkt 3
+
+CREATE TABLE Produkt (
+	Id_pr INTEGER NOT NULL PRIMARY KEY,
+	Nazwa_producenta VARCHAR(50),
+	Nazwa_produktu VARCHAR(50),
+    Opis_produktu TEXT,
+    Cena_netto_zakupu DECIMAL(12,2),
+    Cena_brutto_zakupu DECIMAL(12,2),
+	Cena_netto_sprzedazy DECIMAL(12,2),
+    Cena_brutto_sprzedazy DECIMAL(12,2),
+	Stawka_VAT DECIMAL(12,2)
+);
+
+Pkt 4
+
+CREATE TABLE Zamowienie (
+	Id_zam INTEGER NOT NULL PRIMARY KEY,
+    Id_kl INTEGER NOT NULL,
+	Id_pr INTEGER,
+    Data_zamowienia DATE
+);
+
+Pkt 5
+
+CREATE TABLE Klient (
+	Id_kl INTEGER NOT NULL PRIMARY KEY,
+	Id_zam INTEGER NOT NULL,
+    Imie_klienta VARCHAR(50),
+    Nazwisko_klienta VARCHAR(50), 
+	Adres_klienta VARCHAR(50)
+);
+
+Pkt 6
+
+INSERT INTO Dostawca (Id_dost, Nazwa_producenta, Adres_producenta, NIP_producenta, Data_umowy) 
+VALUES (1, 'Ryłko','Brawo Sp. z o.o., ul. Dworcowa 19, 34-130 Kalwaria Zebrzydowska', '551-21-85-838','2019-05-26’), (2, 'Zakład Krawiecki POZA','ul. Kuszników 7, 80-175 Gdańsk', '583-026-97-68','2018-03-21'), (3, 'Bytom','VRG S.A., ul. Pilotów 10, 31-462 Kraków', '675-000-03-61','2019-04-05'),(4, 'Polskie Płaszcze','Ul. Perla 10a, 41-300 Dąbrowa Górnicza', '644-309-06-43','2020-07-31');
+
+
+INSERT INTO Produkt(Id_pr, Nazwa_producenta, Nazwa_produktu, Opis_produktu, Cena_netto_zakupu, Cena_brutto_zakupu, Cena_netto_sprzedazy, Cena_brutto_sprzedazy, Stawka_VAT) 
+VALUES 
+(2,'Ryłko','Botki VALIA','Jasnobrązowy botek z wycięciami i klamrą', 195.11, 239.99, 243.89,299.98, '23'), 
+(3,'Ryłko','Botki DAGA','Ciemnobeżowe botki z odkrytymi palcami', 149.59, 184.00, 186.99, 229.99, '23'), 
+(4,'Ryłko','Botki SELENA','Szary botek na ozdobnym słupku', 182.11,	224.00,	227.64,	279.99, '23’), (5,'Ryłko','Botki INGA','Beżowy botek z wycięciami i klamrą', 195.11, 239.99, 243.89,299.98, '23');
+
+INSERT INTO Produkt(Id_pr, Nazwa_producenta, Nazwa_produktu, Opis_produktu, Cena_netto_zakupu, Cena_brutto_zakupu, Cena_netto_sprzedazy, Cena_brutto_sprzedazy, Stawka_VAT) 
+VALUES 
+(16, 'Polskie Płaszcze', 'Sukienka SILVIA','Dopasowana sukienka z tkaniny żakardowej', 214.27,	263.55,	267.84,	329.44, '23'), 
+(17, 'Polskie Płaszcze', 'Sukienka CHIARA','Sukienka o luźnym kroju z plisowanej, szyfonowej tkaniny', 344.06,	423.19,	430.08,	528.99, '23'), 
+(18, 'Polskie Płaszcze', 'Sukienka MARIBEL','Idealnie skrojona sukienka, wykonana z wysokiej jakości koronki richelieu', 324.55, 399.20, 405.69, 499.00, '23'), 
+(19, 'Polskie Płaszcze', 'Sukienka CELESTYNA','Kobieca sukienka w granatowym kolorze z szyfonowej tkaniny w serduszka', 324.55, 399.20, 405.69, 499.00, '23'), 
+(20, 'Polskie Płaszcze’, 'Sukienka CELESTYNA','Rozkloszowana sukienka z tafty elastycznej w kolorze błękitnym z motywem kwiatowym', 584.72, 719.21, 730.90, 899.01, '23');
+
+INSERT INTO Produkt(Id_pr, Nazwa_producenta, Nazwa_produktu, Opis_produktu, Cena_netto_zakupu, Cena_brutto_zakupu, Cena_netto_sprzedazy, Cena_brutto_sprzedazy, Stawka_VAT) 
+VALUES 
+(16, 'Polskie Płaszcze', 'Płaszcz HUNA AGNES','Krótki płaszcz, wygodny fason z wykładanymi, symetrycznymi klapami', 143.09,	176.00,	178.86, 220.00, '23'), 
+(17, 'Polskie Płaszcze', 'Płaszcz HUNA ALEKSA','Płaszczyk przejściowy, ocieplany, wykonany z wełnianej tkaniny z fakturą', 175.61, 216.00, 219.51, 270.00, '23'), 
+(18, 'Polskie Płaszcze', 'Płaszcz HUNA ANNA','Płaszcz przejściowy, nieocieplany, wykonany z tkaniny z dodatkiem wełny', 194.47, 239.20, 243.09, 299.00, '23'), 
+(19, 'Polskie Płaszcze’, 'Kurtka HUNA ANIA','Płaszcz przejściowy, krótki płaszcz damski z paskiem', 149.59, 184.00, 186.99, 229.99, '23'), 
+(20, 'Polskie Płaszcze', 'Kurtka HUNA DAFNE','Krótki płaszcz, bez ocieplenia - polecamy na sezon przejściowy', 123.58, 152.00, 154.48, 190.00, '23');
+
+INSERT INTO Klient (Id_kl, Id_zam, Imie_klienta, Nazwisko_klienta, Adres_klienta) 
+VALUES 
+(1, 1, 'Iga', 'Popa',	'ul. Zakrzewki 21a, 95-082 Dobroń'), 
+(2, 2, 'Katarzyna', 'Skowrońska',	'ul. Mokra 34, 95-200 Pabianice'), 
+(3, 3, 'Tomasz', 'Sadzyński',	'ul. Jastarnia 17, 93-466 Łódź'), 
+(4, 4, 'Alojzy',	'Dudek','ul. Warszawska 84/86, 91-503 Łódź'), 
+(5, 5, 'Hanna', 'Adamska', 'ul. Sienkiewicza 73, 67-200 Głogów'), 
+(6, 6, 'Filip', 'Molęda', 'ul. Bolesława Prusa 16, 87-500 Rypin'), 
+(7, 7, 'Alicja', 'Bolibrzuch', 'ul. Mostowa 34, 90-001 Łódź'), 
+(8, 8, 'Franciszek',	'Drobnik',	'ul. Mickiewicza 88, 95-080 Tuszyn'), 
+(9, 9, 'Zofia', 'Jóźwik',	'ul.Franciszkańska 77/83, 46-020 Opole'), 
+(10, 10, 'Wiesław', 'Krzepiński', 'ul. Pomorska 39/1c, 50-216 Wrocław');
+
+INSERT INTO Zamowienie (Id_zam, Id_kl, Id_pr, Data_zamowienia) 
+VALUES 
+(1,	7,	6, '2020-06-05'),
+(2,	8,	2, '2020-06-12'),
+(3, 3,	9, '2020-06-17'),
+(4,	2,	7, '2020-06-13'),
+(5,	4,	8, '2020-06-14'),
+(6,	9,	1, '2020-06-14'),
+(7,	1,	10, '2020-06-05'),
+(8,	10,	5, '2020-06-23'),
+(9,	5,	3, '2020-06-01'),
+(10, 6,	4, '2020-06-23');
+
+Pkt 7
+
+ALTER TABLE Produkt ADD COLUMN Id_dost INTEGER
+
+ALTER TABLE Produkt ADD FOREIGN KEY (Id_dost) REFERENCES Dostawca(Id_dost)
+
+ALTER TABLE Zamowienie ADD FOREIGN KEY (Id_pr) REFERENCES Produkt(Id_pr)
+
+ALTER TABLE Klient ADD FOREIGN KEY (Id_zam) REFERENCES Zamowienie(Id_zam)
+
+Do pkt 7 uzupełniłam dane Id_dost w tabeli Produkt
+
+UPDATE Produkt SET Id_dost = 1 WHERE Nazwa_producenta LIKE 'Ryłko';
+UPDATE Produkt SET Id_dost = 2 WHERE Nazwa_producenta LIKE 'Zakład Krawiecki POZA’;
+UPDATE Produkt SET Id_dost = 3 WHERE Nazwa_producenta LIKE 'Bytom’;
+
+UPDATE `Dostawca` SET `Nazwa_producenta` = 'Polskie Płaszcze' WHERE `Dostawca`.`Id_dost` = 4;
+
+Pkt 8
+
+SELECT * FROM Produkt JOIN Dostawca ON Produkt.Id_dost = Dostawca.Id_dost AND Dostawca.Id_dost = 1;
+
+Pkt 9
+
+SELECT * FROM Produkt JOIN Dostawca ON Produkt.Id_dost = Dostawca.Id_dost AND Dostawca.Id_dost = 1 ORDER BY Nazwa_produktu;
+
+Pkt 10
+
+SELECT AVG(Produkt.Cena_netto_zakupu) FROM Produkt 
+JOIN Dostawca 
+ON Produkt.Id_dost = Dostawca.Id_dost AND Dostawca.Id_dost = 1;
+
+Wynik
+183.406
+
+Pkt 11
+
+SELECT Produkt.Nazwa_produktu AS Tanie, Produkt.Cena_brutto_sprzedazy 
+FROM Produkt 
+JOIN Dostawca 
+ON Produkt.Id_dost = Dostawca.Id_dost AND Dostawca.Id_dost = 1 
+ORDER BY Produkt.Cena_brutto_sprzedazy
+LIMIT 2;
+
+SELECT Produkt.Nazwa_produktu AS Drogie, Produkt.Cena_brutto_sprzedazy 
+FROM Produkt 
+JOIN Dostawca 
+ON Produkt.Id_dost = Dostawca.Id_dost AND Dostawca.Id_dost = 1 
+ORDER BY Produkt.Cena_brutto_sprzedazy DESC
+LIMIT 3;
+
+
+
+Pkt 12
+
+SELECT Produkt.Nazwa_produktu FROM Zamowienie
+JOIN Produkt
+ON Zamowienie.Id_pr = Produkt.Id_pr;
+
+Pkt 13
+
+SELECT Produkt.Nazwa_produktu FROM Zamowienie
+JOIN Produkt
+ON Zamowienie.Id_pr = Produkt.Id_pr
+LIMIT 5;
+
+Pkt 14
+
+SELECT SUM(Produkt.Cena_brutto_zakupu) FROM Produkt
+JOIN Zamowienie
+ON Zamowienie.Id_pr = Produkt.Id_pr;
+
+Suma 2023.79
+
+Pkt 15
+
+SELECT Zamowienie.Data_zamowienia AS DataZam FROM Zamowienie
+JOIN Produkt
+ON Zamowienie.Id_pr = Produkt.Id_pr
+ORDER BY DataZam;
+
+————
+Mozna by dodac nazwe produktu do SELECTa
+
+Pkt 16
+
+SELECT * 
+FROM Produkt 
+WHERE Cena_netto_zakupu IS NULL OR Cena_brutto_zakupu IS NULL OR Cena_netto_sprzedazy IS NULL OR Cena_brutto_sprzedazy IS NULL OR Nazwa_producenta IS NULL OR Nazwa_produktu IS NULL OR Opis_produktu IS NULL OR Stawka_VAT IS NULL OR Id_pr IS NULL OR Id_dost IS NULL;
+
+Lub ???
+
+SELECT * FROM Produkt WHERE 0
+
+——
+Raczej ta 1sza wersja
+
+
+Pkt 17
+
+SELECT COUNT(Produkt.Nazwa_produktu), Produkt.Nazwa_produktu AS Towar, Produkt.Cena_brutto_sprzedazy AS Cena 
+FROM Produkt 
+JOIN Zamowienie
+ON Produkt.Id_pr = Zamowienie.Id_pr
+GROUP BY Zamowienie.Id_pr;
+
+——
+Tu mozna by dodac opcjonalnie sortowanie tak aby wyswietlic od tych najczesciej sprzedawanych
+
+Pkt 18 
+SELECT COUNT(Data_zamowienia), Data_zamowienia
+FROM Zamowienie
+GROUP BY 2
+ORDER BY 1 DESC
+LIMIT 1;
+
+—————
+Wydaje sie ze lepiej byloby wyspecyfikowac nazwy dla kolumn: 
+
+SELECT COUNT(Data_zamowienia) AS czestosc, Data_zamowienia as date
+FROM Zamowienie
+GROUP BY dat
+ORDER BY czestosc DESC
+LIMIT 1;
+
+Przy krotkich poleceniach jak tutaj moze nie ma to znaczenia, ale gdybysmy chcieli pisac wielolinijkowe polecenia lub procedury SQL, wtedy mozna sie latwo pogubic poslugujac sie tylko numerkami
